@@ -1,0 +1,8 @@
+{% for new in news %}
+<h2>{{new.title}}</h2>
+<a href="{{new.url}}">URL</a>
+<p>{{new.description}}</p>
+<br>
+<img src="{{new.image}}" alt="error" width="100px" height="100px">
+<P>{{new.content}}</P>
+{% endfor %}
