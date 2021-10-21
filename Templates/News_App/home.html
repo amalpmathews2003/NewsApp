@@ -1,1 +1,58 @@
-<h1>{{data}}</h1>
+
+{% extends 'News_App\base.html' %}
+{% block content %}
+
+
+<div>
+       {% include 'News_App/cube.html' %}
+</div>
+<div class="top-news-section">
+      <div class="top-news-section-left">
+      {% for news in data %}
+            {% if forloop.first %}
+            <div class="top-news-001">
+                  <div class="subheading-001">{{news.title}}</div>
+                  <div class="image-block-001">
+                        <img src="{{news.img}}" >
+                  </div>
+                  <p class="content-001">{{news.desc}}</p>
+                  <div class="time-tag">OCTOBER 20, 2021</div>
+            </div>
+
+            {% elif forloop.counter == 2 %}
+            <div class="top-news-002">
+                  <div class="subheading-002">{{news.title}}</div>
+                  <div class="image-block-002">
+                        <img src="{{news.img}}" >
+                  </div>
+                  <div class="time-tag">OCTOBER 20, 2021</div>
+            </div>
+            {% elif forloop.counter == 3 %}
+            <div class="top-news-003">
+                  <div class="subheading-002">{{news.title}}</div>
+                  <div class="image-block-002">
+                        <img src="{{news.img}}" >
+                  </div>
+                  <div class="time-tag">OCTOBER 20, 2021</div>
+            </div>
+            {% endif %}
+      {% endfor %}
+      </div>
+      <div class="top-news-section-right">
+      {% for news in data %}
+            {% if forloop.counter >= 4 %}
+            <div class="top-news-else">
+                  <div class="top-news-else-content">
+                        <div class="image-block-002">
+                              <img src="{{news.img}}" >
+                        </div>
+                        <div class="top-news-else-subheading">{{news.title}}</div>
+                  </div>
+                  
+                  
+            </div>
+            {% endif %}   
+      {% endfor %}
+      </div>
+</div>
+{% endblock %}

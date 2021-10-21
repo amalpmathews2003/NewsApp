@@ -1,0 +1,15 @@
+<script>
+      let ip,city
+      fetch("https://ipinfo.io/json?token=2819cb6a8f86ae").then(
+  (response) => response.json()
+).then(
+  (jsonResponse) =>{ 
+      ip=jsonResponse.ip
+      city=jsonResponse.city
+      document.getElementById('location').innerHTML=city
+  }
+  
+)
+</script>
+
+<div  id="location"></div>

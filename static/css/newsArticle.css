@@ -1,0 +1,124 @@
+.news-title{
+      line-height: 1;
+      box-sizing: border-box;
+      margin: 0;
+      padding-top: 25px;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+      margin-bottom: 20px;
+}
+.news-title h1{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      vertical-align: baseline;
+      background: transparent;
+      margin-bottom: 10px;
+      font-size: 45px;
+      line-height: 100%;
+      font-family: EGGIndulekhaUni;
+      color: #333;
+}
+.news-data{
+      line-height: 1;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+      display: inline-block;
+      width: 75%;
+}
+.news-data-date{
+      line-height: 1;
+      box-sizing: border-box;
+      margin: 0;
+      border: 0;
+      outline: 0;
+      font-size: 100%;
+      vertical-align: baseline;
+      background: transparent;
+      padding: 6px 0;
+      border-top: 1px #F2F2F2 solid;
+      border-bottom: 1px #F2F2F2 solid;
+}
+.news-image{
+      width: 800px;
+      height: 400px;
+      float: left;
+}
+.news-image-right{
+      float: left;
+      width: 300px;
+      border: 15px solid green;
+      padding: 50px;
+      margin: 20px;
+      height: 380px;
+}
+.news-body{
+      float: left;
+      width: 800px;
+      padding-left: 30px;
+}
+.news-body-correction{
+      float: left;
+      width: 21px;
+      border: 5px solid white;
+      height: 100px;
+}
+.news-body-right{
+      float: left;
+      width: 300px;
+      border: 15px solid green;
+      height: 500px;
+      padding-right: 100px;
+}
+.news-tag{
+     color: violet;
+     font-size: 23px;
+}
+.comments-container{
+      width: 750px;
+      border: 10px solid grey;
+      height: 800px;
+}
+.comments-count{
+      margin: 10px;
+      font: 18px bold;
+}
+.comments-count hr{
+      margin: 0;
+}
+.comments-container-textarea{
+      float: left;
+      margin: 10px;
+      width: 500px;
+      height: 100px;
+}
+.comments-container button{
+      margin-top: 80px;
+      margin-left: 20px;
+}
+.sort-list{
+      margin-left: 10px;
+}
+.show-comments{
+      /* overflow: hidden; */
+      margin: 10px;
+      margin-top: 20px;
+      width: 700px;
+      border: 10px solid grey;
+      height: 600px;
+}
+.comment-box{
+      margin:10px;
+      border:5px solid grey;
+}

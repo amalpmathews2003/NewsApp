@@ -1,0 +1,73 @@
+{% extends 'News_App/base.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/newsArticle.css' %}">
+
+<div class="news-title">
+      <h1>{{article.data.title}}</h1>
+</div>
+<br>
+<div class="news-data">
+      Amal P Mathews
+      <div class="news-data-date">Oct. 21, 2021, 4:09 a.m.</div>
+</div>
+{% if article.data.pic.url == "/media/IMG" %}
+
+<div>
+      <img src="{{article.data.pic_url}}" class="news-image">
+      {% else %}
+      <img src="{{article.data.pic.url" class="news-image">
+      {% endif %}
+</div>
+<div class="news-image-right">
+</div>
+
+
+<div>
+<div class="news-body">
+      {{article.data.body}}
+      <div class="news-tag">
+            <hr>
+            Tags
+            {% for tag in article.tags %}
+            <span class="badge badge-pill badge-light"> {{tag}}</span>
+            {% endfor %}
+            <hr>
+      </div>
+      <div class="comments-container">
+            <div class="comments-count">
+                  Comments ({{article.comment_num}})
+                  <hr>
+            </div>
+            <form method="POST" action="{% url 'add-comment' '2'%}">
+                  {% csrf_token %}
+                  {{form}}
+                  <button >Submit</button>
+            </form>
+            <br>
+            <div class="sort-list">
+                  <select name="cars" id="cars">
+                        <option value="volvo">Latest</option>
+                        <option value="saab">Best</option>
+                        <option value="mercedes">Oldest</option>
+                      </select>                      
+            </div>
+            <div class="show-comments">
+                  {% for comment in article.comments %}
+                  <div class="comment-box">
+                        {{comment}}
+                  </div>
+                  
+                  {% endfor %}
+            </div>
+      </div>
+
+</div>
+
+</div>
+<div class="news-body-correction"></div>
+<div class="news-body-right"></div>
+
+
+{% endblock %}

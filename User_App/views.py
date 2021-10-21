@@ -5,8 +5,18 @@ from . models import *
 from rest_framework.response import Response
 from . serializer import *
 
-def sign_up(request):
-      return 
+class UserSignUpReactView(APIView):
+
+    serializer_class = UserReactSerializer
+    def post(self, request):
+        serializer = UserReactSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return  Response(serializer.data)
+      
+
+
+
       
 class ReactView(APIView):
     
@@ -18,23 +28,11 @@ class ReactView(APIView):
         return Response(detail)
   
     def post(self, request):
-  
+        #print(request.data)
         serializer = ReactSerializer(data=request.data)
+      #  print(serializer)
         if serializer.is_valid(raise_exception=True):
-            print(serializer)
-            #serializer.save()
+            #print(serializer)
+            serializer.save()
             return  Response(serializer.data)
         
-
-class UserSignUpReactView(APIView):
-    serializer_class = UserReactSerializer
-    
-    def get(self,request):
-        return Response()
-    
-    def post(self,request):
-        serializer=UserReactSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            print(serializer)
-            #serializer.save()
-        return Response(serializer.data)

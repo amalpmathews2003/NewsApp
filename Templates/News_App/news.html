@@ -1,0 +1,24 @@
+
+
+{% for article in articles %}
+title:{{article.data.title}}<br>
+
+body:{{article.data.body}}<br>
+pic:{{article.data.pic.url}}<br>
+pic_url:{{article.data.pic_url}}
+date:{{article.data.date}}<br>
+type:{{article.data.type}}<br>
+comments:
+{% for comment in article.comments %}
+{{comment}},
+<br>
+{% endfor %}
+tags:
+{% for tag in article.tags %}
+{{tag}},
+<br>
+{% endfor %}
+
+<hr>
+{% endfor %}
+
