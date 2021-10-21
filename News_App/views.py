@@ -46,7 +46,7 @@ def showNewsArticle(request,id):
 
 
 def home(request):
-      with open('Python_Codes/temp.txt','r',encoding='utf-8') as f:
+      with open('Python_Codes/news.txt','r',encoding='utf-8') as f:
             data=f.read()
       return render(request, 'News_App/home.html', {'data':eval(data)})
 
@@ -55,6 +55,65 @@ def home(request):
 
 def auth_test(request):
       return render(request,'News_App/auth_test.html',{})
+
+def convertDate(date):
+      from dateutil.parser import parse
+      tzinfos = {"IST": "Asia/Kolkata"}
+      return parse(date, tzinfos=tzinfos)
+
+def addToDatabse(newses):
+      for news in newses:
+            article=NewsArticle()
+            article.title=news['title']
+            article.body=news['body']
+            article.pic_url=news['img']
+            article.href=news['href']
+            article.date=convertDate(news['date'])
+            article.save()
+            for tag in news['tags']:
+                  try:
+                        Tag=Tags()
+                        Tag.tag=tag
+                        Tag.newsArticle=article
+                  except:
+                        pass
+
+            
+
+def addNewstoDatabase(request):
+      with open('Python_Codes/news.txt','r',encoding='utf-8') as f:
+            data=f.read()
+            data=eval(data)
+            top_news=data['top_news']
+            addToDatabse(top_news)
+
+            print(f'{len(top_news)}added to database')
+      return redirect('home')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class NewsArticlesReactView(APIView):
       serializer_class = NewsArticleSerializer

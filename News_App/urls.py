@@ -14,5 +14,6 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
     path('ok',views.auth_test),
     path('news/<int:id>/comment',views.addComment,name="add-comment"),
-    path('search',views.searchNews,name='search')
+    path('search',views.searchNews,name='search'),
+    path('add',views.addNewstoDatabase)
 ]
