@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-fph$!!2ujpn@t-n4(p-ep5l4kco_ahf9y=77dba4v@lptf0+r)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -152,7 +152,7 @@ STATIC_ROOT=  os.path.join(BASE_DIR, 'static')
 CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 STATICFILES_DIRS = (
-                    os.path.join(BASE_DIR, 'staticfiles'),
+                    os.path.join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = '/media/'
@@ -175,14 +175,18 @@ import dj_database_url
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '<database_name>',
-        'USER': '<user_name>',
-        'PASSWORD': '<password>',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'dei0abvg4p7ou4',
+        'USER': 'cyuambjqapmeid',
+        'PASSWORD': '71cd494c18e9a6ae011ae58635c61584760d10dff67d7a0e034ccabc44bafe9c',
+        'HOST': 'ec2-50-19-210-145.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
+
+import django_heroku
+
+django_heroku.settings(locals())
