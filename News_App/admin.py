@@ -9,7 +9,8 @@ class NewsArticleAdmin(admin.ModelAdmin):
     search_fields=['title','body']
     list_filter=['date','type']
     list_display=['title','date','type']
-    #fields=['title','body',('pic','pic_url'),('likes','type')]
+    readonly_fields = ('id','likes')
+    fields=['title','body',('pic','pic_url'),('likes','type'),'date','href','id','priority']
     ordering=['-date']
     #readonly_fields=['date']
     #inlines=[NewsArticleAdminInline]

@@ -4,13 +4,13 @@ from PIL import Image
 
 class NewsArticle(models.Model):
       title=models.CharField(max_length=255)
-      #desc=models.TextField(default="")
+      priority=models.IntegerField(default=0)
       body=models.TextField()
       pic=models.ImageField(upload_to="images/",default='IMG',null=True) 
       pic_url=models.URLField(max_length=200,default=False)
       date=models.DateTimeField()
       likes=models.IntegerField(default=0)
-      types=["News","Local","Sprots","Children","Life","Tech","Astro","Health","Movie","Carrer","Travel"]
+      types=["Top News","News","Local","Sprots","Children","Life","Tech","Astro","Health","Movie","Carrer","Travel"]
       newsTypes=[(item,item) for (idx,item) in enumerate(types)]
       type=models.CharField(max_length=30,choices=newsTypes,default="News")
       href=models.URLField(max_length=200,default=False)

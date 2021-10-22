@@ -4,7 +4,8 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path('',views.home,name="home"),
+    path('',views.home2,name="home"),
+    path('1',views.home,name="home1"),
    #path('news',views.news_api_call,name="news-api-call"),
    path('news',views.news,name="news"),
       path('news/<int:id>',views.showNewsArticle,name="news-article"),

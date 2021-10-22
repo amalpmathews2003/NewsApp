@@ -172,16 +172,16 @@ AUTHENTICATION_BACKENDS = [
 
 import dj_database_url
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dei0abvg4p7ou4',
-        'USER': 'cyuambjqapmeid',
-        'PASSWORD': '71cd494c18e9a6ae011ae58635c61584760d10dff67d7a0e034ccabc44bafe9c',
-        'HOST': 'ec2-50-19-210-145.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dei0abvg4p7ou4',
+#         'USER': 'cyuambjqapmeid',
+#         'PASSWORD': '71cd494c18e9a6ae011ae58635c61584760d10dff67d7a0e034ccabc44bafe9c',
+#         'HOST': 'ec2-50-19-210-145.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

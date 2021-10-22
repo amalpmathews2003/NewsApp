@@ -8,47 +8,55 @@
 </div>
 <div class="top-news-section">
       <div class="top-news-section-left">
-      {% for news in data.top_news %}
+      {% for news in data %}
             {% if forloop.first %}
+            <a href="{% url 'news-article' news.id %}">
             <div class="top-news-001">
+                  
                   <div class="subheading-001">{{news.title}}</div>
                   <div class="image-block-001">
-                        <img src="{{news.img}}" >
+                        <img src="{{news.pic_url}}" >
                   </div>
-                  <p class="content-001">{{news.desc}}</p>
+                  <p class="content-001">Descrition</p>
                   <div class="time-tag">{{news.date}}</div>
+                  </a>
             </div>
 
             {% elif forloop.counter == 2 %}
+            <a href="{% url 'news-article' news.id %}">
             <div class="top-news-002">
+                  
                   <div class="subheading-002">{{news.title}}</div>
                   <div class="image-block-002">
-                        <img src="{{news.img}}" >
+                        <img src="{{news.pic_url}}" >
                   </div>
-                  <div class="time-tag">{{news.date}}</div>
+                  <div class="time-tag">{{news.date}}</div></a>
             </div>
             {% elif forloop.counter == 3 %}
+            <a href="{% url 'news-article' news.id %}">
             <div class="top-news-003">
+                  
                   <div class="subheading-002">{{news.title}}</div>
                   <div class="image-block-002">
-                        <img src="{{news.img}}" >
+                        <img src="{{news.pic_url}}" >
                   </div>
-                  <div class="time-tag">{{news.date}}</div>
+                  <div class="time-tag">{{news.date}}</div></a>
             </div>
             {% endif %}
       {% endfor %}
       </div>
       <div class="top-news-section-right">
-      {% for news in data.top_news %}
+      {% for news in data %}
             {% if forloop.counter >= 4 %}
+            <a href="{% url 'news-article' news.id %}">
             <div class="top-news-else">
                   <div class="top-news-else-content">
                         <div class="image-block-002">
-                              <img src="{{news.img}}" >
+                              <img src="{{news.pic_url}}" >
                         </div>
                         <div class="top-news-else-subheading">{{news.title}}</div>
                   </div>
-                  
+                  </a>
                   
             </div>
             {% endif %}   

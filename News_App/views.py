@@ -46,9 +46,13 @@ def showNewsArticle(request,id):
 
 
 def home(request):
-      with open('Python_Codes/news.txt','r',encoding='utf-8') as f:
-            data=f.read()
-      return render(request, 'News_App/home.html', {'data':eval(data)})
+      
+            return redirect('home')
+
+
+def home2(request):
+      data=NewsArticle.objects.filter(type="Top News").order_by('-date')[:13]
+      return render(request, 'News_App/home.html', {'data':data})
 
 # def news_api_call(request):
 #       return render(request,'News_App/news_api.html',{"news":news_api_get()})
@@ -61,10 +65,11 @@ def convertDate(date):
       tzinfos = {"IST": "Asia/Kolkata"}
       return parse(date, tzinfos=tzinfos)
 
-def addToDatabse(newses):
+def addToDatabse(newses,type):
       for news in newses:
             article=NewsArticle()
             article.title=news['title']
+            article.type=type
             article.body=news['body']
             article.pic_url=news['img']
             article.href=news['href']
@@ -85,7 +90,7 @@ def addNewstoDatabase(request):
             data=f.read()
             data=eval(data)
             top_news=data['top_news']
-            addToDatabse(top_news)
+            addToDatabse(top_news,"Top News")
 
             print(f'{len(top_news)}added to database')
       return redirect('home')
