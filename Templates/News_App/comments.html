@@ -1,0 +1,34 @@
+<div class="comments-container">
+      <div class="comments-count">
+            Comments ({{article.comment_num}})
+            <hr>
+      </div>
+      {% if user.is_authenticated %}
+      <form method="POST" action="{% url 'add-comment' article.data.id %}">
+            {% csrf_token %}
+            {{form}}
+            <button class="btn btn-primary">Submit</button> 
+      </form>
+      {% else %}
+      {% load socialaccount %}
+            <textarea disabled name="comment" cols="40" rows="10" placeholder="Write Your Comment" class="comments-container-textarea"  id="id_comment"></textarea>
+            <a  href="{% provider_login_url 'google' %}?next={{ request.path }}"><button class="btn btn-primary">Login then Comment</button> </a>
+      
+      {% endif %}
+      <br><br>
+      <div class="sort-list">
+            <select name="cars" id="cars">
+                  <option value="volvo">Latest</option>
+                  <option value="saab">Best</option>
+                  <option value="mercedes">Oldest</option>
+                </select>                      
+      </div>
+      <div class="show-comments">
+            {% for comment in article.comments %}
+            <div class="comment-box">
+                  {{comment}}
+            </div>
+            
+            {% endfor %}
+      </div>
+</div>

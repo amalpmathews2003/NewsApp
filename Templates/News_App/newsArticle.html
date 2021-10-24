@@ -20,8 +20,8 @@
       <img src="{{article.data.pic.url" class="news-image">
       {% endif %}
 </div>
-<div class="news-image-right">
-</div>
+<!-- <div class="news-image-right">
+</div> -->
 
 
 <div>
@@ -37,39 +37,12 @@
             {% endfor %}
             <hr>
       </div>
-      <div class="comments-container">
-            <div class="comments-count">
-                  Comments ({{article.comment_num}})
-                  <hr>
-            </div>
-            <form method="POST" action="{% url 'add-comment' article.data.id %}">
-                  {% csrf_token %}
-                  {{form}}
-                  <button >Submit</button>
-            </form>
-            <br>
-            <div class="sort-list">
-                  <select name="cars" id="cars">
-                        <option value="volvo">Latest</option>
-                        <option value="saab">Best</option>
-                        <option value="mercedes">Oldest</option>
-                      </select>                      
-            </div>
-            <div class="show-comments">
-                  {% for comment in article.comments %}
-                  <div class="comment-box">
-                        {{comment}}
-                  </div>
-                  
-                  {% endfor %}
-            </div>
-      </div>
-
+      {% include 'News_App/comments.html' %}
 </div>
 
 </div>
-<div class="news-body-correction"></div>
-<div class="news-body-right"></div>
+<!-- <div class="news-body-correction"></div>
+<div class="news-body-right"></div> -->
 
 
 {% endblock %}
