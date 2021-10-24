@@ -9,11 +9,20 @@ sys.path.append("..")
 # from Python_Codes.news_api import news_api_get
 
 
+Newstype=NewsArticle.types
+
 def searchNews(request):
       if request.method=="POST":
             searched=request.POST['search']	
             results=NewsArticle.objects.filter(title__icontains=searched).order_by('-date')
-            return render(request,'News_App/search-result.html',{"articles":results})
+            return render(request,'News_App/search-result.html',
+             {"articles":results,"searched":searched,"Newstype":Newstype})
+
+def filterNews(request,type):
+      print(type)
+      results=NewsArticle.objects.filter(type__icontains=type).order_by('-date')
+      return render(request,'News_App/search-result.html',
+            {"articles":results,"searched":type,"Newstype":Newstype})
 
 def addComment(request,id):
       if request.method=="POST":
@@ -34,7 +43,7 @@ def news(request):
             com=Comment.objects.filter(newsArticle=data.id)
             tags=Tags.objects.filter(newsArticle=data.id)
             articles.append({"data":data,'comments':com,'tags':tags})
-      return render(request,'News_App/news.html',{"articles":articles})
+      return render(request,'News_App/news.html',{"articles":articles,"Newstype":Newstype})
 
 def showNewsArticle(request,id):
       data=NewsArticle.objects.get(id=id)
@@ -42,17 +51,14 @@ def showNewsArticle(request,id):
       tags=Tags.objects.filter(newsArticle=id)
       return render(request,'News_App/newsArticle.html',
       {'article':{'data':data,'comments':com,'tags':tags,'comment_num':len(com)}
-      ,'form':CommentForm})
+      ,'form':CommentForm,"Newstype":Newstype})
+
 
 
 def home(request):
       
-            return redirect('home')
-
-
-def home2(request):
-      data=NewsArticle.objects.filter(type="Top News").order_by('-date')[:13]
-      return render(request, 'News_App/home.html', {'data':data})
+      data=NewsArticle.objects.filter(type="Top News").order_by('-date').order_by('priority')[:13]
+      return render(request, 'News_App/home.html', {'data':data,"Newstype":Newstype})
 
 # def news_api_call(request):
 #       return render(request,'News_App/news_api.html',{"news":news_api_get()})
@@ -89,7 +95,7 @@ def addNewstoDatabase(request):
       with open('Python_Codes/news.txt','r',encoding='utf-8') as f:
             data=f.read()
             data=eval(data)
-            top_news=data['top_news']
+            top_news=data['Top News']
             addToDatabse(top_news,"Top News")
 
             print(f'{len(top_news)}added to database')

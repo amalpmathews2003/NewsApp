@@ -1,1 +1,21 @@
-{{articles}}
+{% extends 'News_App/base.html' %}
+{% block content %}
+<div class="margin-top" style="margin-top: 40px;margin-bottom: 40px;">
+      <h3>Showing results for {{searched}}</h3>
+</div>
+{% for article in articles %}
+
+<a href="{% url 'news-article' article.id %}">
+      <div class="top-news-else">
+            <div class="top-news-else-content">
+                  <div class="image-block-002">
+                        <img src="{{article.pic_url}}" >
+                  </div>
+                  <div class="top-news-else-subheading">{{article.title}}</div>
+            </div>
+            </a>
+            
+      </div>
+
+{% endfor %}
+{% endblock %}

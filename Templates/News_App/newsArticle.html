@@ -41,7 +41,7 @@
                   Comments ({{article.comment_num}})
                   <hr>
             </div>
-            <form method="POST" action="{% url 'add-comment' '2'%}">
+            <form method="POST" action="{% url 'add-comment' article.data.id %}">
                   {% csrf_token %}
                   {{form}}
                   <button >Submit</button>

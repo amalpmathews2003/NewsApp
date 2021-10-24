@@ -243,6 +243,7 @@ body{
       position: relative;
       float: left;
       margin: 0px 8px 0px 0px;
+      width: 100px;
 }
 .top-news-else-subheading{
       box-sizing: border-box;
