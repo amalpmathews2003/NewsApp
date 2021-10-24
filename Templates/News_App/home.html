@@ -3,14 +3,14 @@
 {% block content %}
 
 
-<div>
+<!-- <div>
        {% include 'News_App/cube.html' %}
-</div>
+</div> -->
 <div class="top-news-section">
       <div class="top-news-section-left">
       {% for news in data %}
             {% if forloop.first %}
-            <a href="{% url 'news-article' news.id %}">
+            <a href="{% url 'news-article' news.id %}" >
             <div class="top-news-001">
                   
                   <div class="subheading-001">{{news.title}}</div>

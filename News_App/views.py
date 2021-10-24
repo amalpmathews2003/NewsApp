@@ -50,7 +50,7 @@ def showNewsArticle(request,id):
       com=Comment.objects.filter(newsArticle=id)
       tags=Tags.objects.filter(newsArticle=id)
       return render(request,'News_App/newsArticle.html',
-      {'article':{'data':data,'comments':com,'tags':tags,'comment_num':len(com)}
+      {'article':{'data':data,"body":eval(data.body),'comments':com,'tags':tags,'comment_num':len(com)}
       ,'form':CommentForm,"Newstype":Newstype})
 
 

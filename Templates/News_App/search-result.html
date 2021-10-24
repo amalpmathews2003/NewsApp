@@ -3,6 +3,7 @@
 <div class="margin-top" style="margin-top: 40px;margin-bottom: 40px;">
       <h3>Showing results for {{searched}}</h3>
 </div>
+<div id="results">
 {% for article in articles %}
 
 <a href="{% url 'news-article' article.id %}">
@@ -18,4 +19,11 @@
       </div>
 
 {% endfor %}
+</div>
+<script>
+function highlight(text) {
+  document.getElementById("results").innerHTML=document.getElementById("results").innerHTML.replaceAll(text,"<span style='background-color: yellow'>" + text + "</span>")
+}
+highlight("{{searched}}")
+</script>
 {% endblock %}

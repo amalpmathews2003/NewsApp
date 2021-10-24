@@ -26,8 +26,9 @@
 
 <div>
 <div class="news-body">
-      {{article.data.id}}
-      {{article.data.body}}
+      {% for p in article.body%}
+            <p>{{p}}</p>
+      {% endfor %}
       <div class="news-tag">
             <hr>
             Tags
