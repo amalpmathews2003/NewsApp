@@ -45,6 +45,8 @@ def news(request):
             articles.append({"data":data,'comments':com,'tags':tags})
       return render(request,'News_App/news.html',{"articles":articles,"Newstype":Newstype})
 
+
+
 def showNewsArticle(request,id):
       data=NewsArticle.objects.get(id=id)
       com=Comment.objects.filter(newsArticle=id)
