@@ -10,7 +10,7 @@ class NewsArticle(models.Model):
       pic_url=models.URLField(max_length=200,default=False)
       date=models.DateTimeField()
       likes=models.IntegerField(default=0)
-      types=["Top News","News","Local","Sprots","Children","Life","Tech","Astro","Health","Movie","Carrer","Travel"]
+      types=["Top News","Trending","News","Sports","Health","Children","Life","Tech","Astro","Health","Movie","Carrer","Travel","Home","Auto","Music"]
       newsTypes=[(item,item) for (idx,item) in enumerate(types)]
       type=models.CharField(max_length=30,choices=newsTypes,default="News")
       href=models.URLField(max_length=200,default=False)

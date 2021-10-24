@@ -12,6 +12,16 @@ class Manorama:
             os.chdir(os.path.dirname(__file__))
             self.scrap_top_news(soup)
             self.scrap_trending_news(soup)
+            self.scrape_X_news("Sports","https://www.manoramaonline.com/sports.html")
+            self.scrape_X_news('Health',"https://www.manoramaonline.com/health.html")
+            self.scrape_X_news('Movie',"https://www.manoramaonline.com/movies.html")
+            self.scrape_X_news('Tech',"https://www.manoramaonline.com/technology.html")
+            self.scrape_X_news('Children',"https://www.manoramaonline.com/children.html")
+            self.scrape_X_news('Life',"https://www.manoramaonline.com/style.html")
+            self.scrape_X_news('Astro',"https://www.manoramaonline.com/astrology.html")
+            self.scrape_X_news('Auto',"https://www.manoramaonline.com/fasttrack.html")
+            self.scrape_X_news('Music',"https://www.manoramaonline.com/music.html")
+            self.scrape_X_news('Home',"https://www.manoramaonline.com/homestyle.html")
             self.save()
 
       def scrap_top_news(self,soup):
@@ -28,18 +38,13 @@ class Manorama:
                   title=head['title']
                   href=head['href']
                   img=news2.find("div",{"class":"image-block"}).find('a').find("img")['data-src-web']
-                  try:
-                        desc=news2.find('p',{'class':'content-ml-001'}).find('a').text
-                        body=self.scrap_news_body(href)
+                  
+                  body=self.scrap_news_body(href)
 
-                        all.append({'title':title,"desc":desc,'href':href,'img':url+img,
-                        "body":body["body_text"],'tags':body['tags'],'date':body['date']
-                        })
-                  except:
-                        body=self.scrap_news_body(href)
-                        all.append({'title':title,'href':href,'img':self.url+img,
-                        "body":body["body_text"],'tags':body['tags'],'date':body['date'],'priority':priority
-                        })
+                  all.append({'title':title,'href':href,'img':body['img'],
+                  "body":body["body_text"],'tags':body['tags'],'date':body['date'],'priority':priority
+                  })
+                  
                   priority+=1
                         
             news=soup.find("div",{"class":"ml-story-list-right"}).find_all('div',{'class':'story-content'})
@@ -64,21 +69,52 @@ class Manorama:
             soup=soup.find_all('li',{'class':''})     
             for article in soup:
                   href=article.find('a')['href']
-                  title=article.find('a')['title']
-                  img=self.url+article.find('div').find('img')['data-src-web']
-
                   body=self.scrap_news_body(href)
 
-                  trending_now.append({'title':title,
+                  trending_now.append({'title':body['title'],
                   'href':href,'img':body['img'],'body':body['body_text'],'date':body['date'],
                   'tags':body['tags'],'priority':priority
                   })
                   priority+=1
             self.articles['Trending']=trending_now
 
+      def scrape_sports_news(self,url=""):
+            url="https://www.manoramaonline.com/sports.html"
+            r=requests.get(url)
+            soup=BeautifulSoup(r.content,'html5lib')
+            priority=1
+            top_stories=soup.find('div',{'class':'section-top-story-listing'}).find_all('li')
+            sports=[]
+            for stories in top_stories:
+                  href=stories.find('a')['href']
+                  body=self.scrap_news_body(href)
+                  sports.append({'title':body['title'],
+                  'href':href,'img':body['img'],'body':body['body_text'],'date':body['date'],
+                  'tags':body['tags'],'priority':priority
+                  })
+                  priority+=1
+            self.articles['Sports']=sports
+      def scrape_X_news(self,type,url=""):
+
+            r=requests.get(url)
+            soup=BeautifulSoup(r.content,'html5lib')
+            priority=1
+            top_stories=soup.find('div',{'class':'section-top-story-listing'}).find_all('li')
+            health=[]
+            for stories in top_stories:
+                  href=stories.find('a')['href']
+                  body=self.scrap_news_body(href)
+                  health.append({'title':body['title'],
+                  'href':href,'img':body['img'],'body':body['body_text'],'date':body['date'],
+                  'tags':body['tags'],'priority':priority
+                  })
+                  priority+=1
+            self.articles[type]=health
+            
       def scrap_news_body(self,url):
             r=requests.get(url)
             soup=BeautifulSoup(r.content,'html5lib')
+            title=soup.find('div',{'class':'story-header'}).find('h1',{'class':'story-headline'}).text
             date=soup.find('time',{'class':'story-author-date'}).text
             body=soup.find('div',{'class':'article rte-article'})
             body_text=[]
@@ -93,7 +129,9 @@ class Manorama:
                   pass
             print(f"Scraped {url}")
             img=soup.find('div',{'class':'story-figure-image'}).find('img')['src']
-            return {'date':date,'body_text':body_text,'tags':tags,'img':img}
+            return {'date':date,'body_text':body_text,'tags':tags,'img':img,'title':title}
+
+
 
       def save(self):
             with open('news.txt','w', encoding="utf-8") as f:

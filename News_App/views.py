@@ -79,6 +79,7 @@ def addToDatabse(newses,type):
             article.body=news['body']
             article.pic_url=news['img']
             article.href=news['href']
+            article.priority=news['priority']
             article.date=convertDate(news['date'])
             article.save()
             for tag in news['tags']:
@@ -86,6 +87,7 @@ def addToDatabse(newses,type):
                         Tag=Tags()
                         Tag.tag=tag
                         Tag.newsArticle=article
+                        Tag.save()
                   except:
                         pass
 
@@ -95,10 +97,9 @@ def addNewstoDatabase(request):
       with open('Python_Codes/news.txt','r',encoding='utf-8') as f:
             data=f.read()
             data=eval(data)
-            top_news=data['Top News']
-            addToDatabse(top_news,"Top News")
-
-            print(f'{len(top_news)}added to database')
+            for title,val in data.items():
+                  addToDatabse(val,title)
+                  print(f'{title} {len(val)}added to database')
       return redirect('home')
 
 
