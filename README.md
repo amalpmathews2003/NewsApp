@@ -9,3 +9,4 @@ Features
 - Filter 
 - Search
 - Comment options
+- Tags
